@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const common = [
+	// ts-node no transpila, lo corre en ts:
 	'--require-module ts-node/register' // Load TypeScript module
 ];
 
