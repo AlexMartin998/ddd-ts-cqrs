@@ -10,7 +10,14 @@ module.exports = {
 				project: ['./tsconfig.json']
 			},
 			rules: {
-				'@typescript-eslint/no-floating-promises': 'warn'
+				'@typescript-eslint/no-floating-promises': 'warn',
+				'@typescript-eslint/no-require-imports': 'off',
+				'@typescript-eslint/no-var-requires': 'off',
+				'@typescript-eslint/explicit-module-boundary-types': 'off',
+				'@typescript-eslint/no-confusing-void-expression': 'off',
+				'@typescript-eslint/no-unsafe-assignment': 'off',
+				'@typescript-eslint/no-misused-promises': 'off',
+				curly: 'off'
 			}
 		}
 	]
