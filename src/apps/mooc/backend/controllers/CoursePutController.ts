@@ -4,18 +4,12 @@ import httpStatus from 'http-status';
 import { CourseCreator } from '../../../../Contexts/Mooc/Courses/application/CourseCreator';
 import { Controller } from './Controller';
 
-type CoursePutRequest = Request & {
+interface CoursePutRequest extends Request {
 	body: {
 		id: string;
 		name: string;
 		duration: string;
 	};
-};
-
-interface CoursePutControllerBody {
-	id: string;
-	name: string;
-	duration: string;
 }
 
 export class CoursePutController implements Controller {
@@ -23,9 +17,9 @@ export class CoursePutController implements Controller {
 
 	async run(req: CoursePutRequest, res: Response): Promise<void> {
 		try {
-			const { id, name, duration } = req.body as CoursePutControllerBody;
+			const { id, name, duration } = req.body;
 
-			await this.courseCreator.run(id, name, duration);
+			await this.courseCreator.run({ id, name, duration });
 
 			res.status(httpStatus.CREATED).send();
 		} catch (error) {

@@ -17,7 +17,7 @@ describe('CourseCreator', () => {
 		const expectedCourse = new Course(id, name, duration);
 
 		// Aqui lo Instancia el Caso de uso, q luego es comparado con el mock
-		await creator.run(id, name, duration);
+		await creator.run({ id, name, duration });
 
 		// los errores son mas explicitos: Como es el Caso de Uso quien instancia el Course con lo q le pasamos, y al armar el test asi, se compara lo q instancia el caso de uso y el expected error, de esta manera se dan errores mas descriptivos y no un boolean
 		repository.assertSaveHaveBeenCalledWith(expectedCourse);
