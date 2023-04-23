@@ -5,8 +5,6 @@ import { CourseName } from '../../../../../src/Contexts/Mooc/Courses/domain/valu
 import { CourseNameLengthExceeded } from '../../../../../src/Contexts/Mooc/Courses/domain/value-object/CourseNameLengthExceeded';
 import { CourseId } from '../../../../../src/Contexts/Mooc/Shared/domain/Courses/CourseId';
 import { CourseRepositoryMock } from '../__mocks__/CourseRepositoryMock';
-import { CourseMother } from '../domain/CourseMother';
-import { CreateCourseRequestMother } from './CreateCourseRequestMother';
 
 describe('CourseCreator', () => {
 	let repository: CourseRepositoryMock;
@@ -18,13 +16,20 @@ describe('CourseCreator', () => {
 	});
 
 	it('should create a valid course', async () => {
-		const request = CreateCourseRequestMother.random();
+		const id = '0766c602-d4d4-48b6-9d50-d3253123275e';
+		const name = 'name';
+		const duration = '5 hours';
+		const expectedCourse = new Course({
+			id: new CourseId(id),
+			name: new CourseName(name),
+			duration: new CourseDuration(duration)
+		});
 
-		const course = CourseMother.fromRequest(request);
+		// Aqui lo Instancia el Caso de uso, q luego es comparado con el mock
+		await creator.run({ id, name, duration });
 
-		await creator.run(request);
-
-		repository.assertSaveHaveBeenCalledWith(course);
+		// los errores son mas explicitos: Como es el Caso de Uso quien instancia el Course con lo q le pasamos, y al armar el test asi, se compara lo q instancia el caso de uso y el expected error, de esta manera se dan errores mas descriptivos y no un boolean
+		repository.assertSaveHaveBeenCalledWith(expectedCourse);
 	});
 
 	it('should throw error if course name length is exceeded', () => {
