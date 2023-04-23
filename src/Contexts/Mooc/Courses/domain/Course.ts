@@ -1,11 +1,16 @@
+import { Uuid } from '../../../shared/domain/value-object/Uuid';
+
 export class Course {
-	readonly id: string;
+	readonly id: Uuid;
 	readonly name: string;
 	readonly duration: string;
 
-	constructor(id: string, name: string, duration: string) {
+	constructor({ id, name, duration }: { id: Uuid; name: string; duration: string }) {
 		this.id = id;
 		this.name = name;
 		this.duration = duration;
 	}
+	// constructor(dto: { id: Uuid; name: string; duration: string }) {
+	// 	Object.assign(this, dto);
+	// }
 }
