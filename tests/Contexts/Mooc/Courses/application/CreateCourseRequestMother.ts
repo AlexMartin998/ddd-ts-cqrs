@@ -19,10 +19,10 @@ export class CreateCourseRequestMother {
 		);
 	}
 
-	static invalidRequest(): CreateCourseRequest {
+	static nameLengthExceededInvalidRequest(): CreateCourseRequest {
 		return {
 			id: CourseIdMother.random().value,
-			name: CourseNameMother.invalidName(),
+			name: CourseNameMother.exceededLength(),
 			duration: CourseDurationMother.random().value
 		};
 	}

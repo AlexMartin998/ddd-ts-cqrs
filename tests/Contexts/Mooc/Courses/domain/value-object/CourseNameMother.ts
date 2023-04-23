@@ -10,7 +10,7 @@ export class CourseNameMother {
 		return this.create(WordMother.random({ maxLength: 20 }));
 	}
 
-	static invalidName(): string {
-		return 'a'.repeat(40);
+	static exceededLength(): string {
+		return 'some invalid name\n'.repeat(40);
 	}
 }
