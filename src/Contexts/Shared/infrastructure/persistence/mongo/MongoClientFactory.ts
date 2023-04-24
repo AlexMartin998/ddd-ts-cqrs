@@ -28,7 +28,7 @@ export class MongoClientFactory {
 	// creacion del cliente de mongo con el driver de mongo q nos proporciona la dep de mongodb
 	// pero para resolver esto, tenemos otra Factoria q nos da las Configs de Mongo 'MongoConfigFactory'
 	private static async createAndConnectClient(config: MongoConfig): Promise<MongoClient> {
-		const client = new MongoClient(config.url);
+		const client = new MongoClient(config.url, { ignoreUndefined: true });
 
 		await client.connect();
 

@@ -20,7 +20,6 @@ describe('CourseRepository', () => {
 	describe('#save', () => {
 		it('should save a course', async () => {
 			const course = CourseMother.random();
-
 			await repository.save(course);
 		});
 	});
