@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { EntitySchema } from 'typeorm';
 
 import { Nullable } from '../../../../Shared/domain/Nullable';
@@ -17,7 +18,7 @@ export class TypeOrmCourseRepository extends TypeOrmRepository<Course> implement
 		const repository = await this.repository();
 
 		// sabe a q Schema atacar gracias al entitySchema
-		const course = await repository.findOne({ id });
+		const course = await repository.findOne({ id } as any);
 
 		return course;
 	}

@@ -9,11 +9,7 @@ export class CourseCreator {
 	constructor(private readonly repository: CourseRepository) {}
 
 	async run({ id, name, duration }: CreateCourseRequest): Promise<void> {
-		const course = new Course({
-			id: new CourseId(id),
-			name: new CourseName(name),
-			duration: new CourseDuration(duration)
-		});
+		const course = new Course(new CourseId(id), new CourseName(name), new CourseDuration(duration));
 
 		return this.repository.save(course);
 	}

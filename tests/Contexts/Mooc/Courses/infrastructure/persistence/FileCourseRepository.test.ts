@@ -7,11 +7,11 @@ import { CourseId } from '../../../../../../src/Contexts/Mooc/Shared/domain/Cour
 describe('Save Course', () => {
 	it('should have a course', async () => {
 		const repository = new FileCourseRepository();
-		const course = new Course({
-			id: new CourseId('0766c602-d4d4-48b6-9d50-d3253123275e'),
-			name: new CourseName('name'),
-			duration: new CourseDuration('duration')
-		});
+		const course = new Course(
+			new CourseId('0766c602-d4d4-48b6-9d50-d3253123275e'),
+			new CourseName('name'),
+			new CourseDuration('duration')
+		);
 
 		await repository.save(course);
 	});

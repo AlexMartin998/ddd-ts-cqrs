@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AggregateRoot } from '../../../Shared/domain/AggregateRoot';
 import { CourseId } from '../../Shared/domain/Courses/CourseId';
 import { CourseDuration } from './value-object/CourseDuration';
@@ -9,15 +8,7 @@ export class Course extends AggregateRoot {
 	readonly name: CourseName;
 	readonly duration: CourseDuration;
 
-	constructor({
-		id,
-		name,
-		duration
-	}: {
-		id: CourseId;
-		name: CourseName;
-		duration: CourseDuration;
-	}) {
+	constructor(id: CourseId, name: CourseName, duration: CourseDuration) {
 		super();
 
 		this.id = id;
@@ -29,11 +20,11 @@ export class Course extends AggregateRoot {
 	// }
 
 	static fromPrimitives(plainData: { id: string; name: string; duration: string }): Course {
-		return new Course({
-			id: new CourseId(plainData.id),
-			name: new CourseName(plainData.name),
-			duration: new CourseDuration(plainData.duration)
-		});
+		return new Course(
+			new CourseId(plainData.id),
+			new CourseName(plainData.name),
+			new CourseDuration(plainData.duration)
+		);
 	}
 
 	toPrimitives(): any {
