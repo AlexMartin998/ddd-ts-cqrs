@@ -1,27 +1,11 @@
-version: '3.9'
+version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:6.0
-    container_name: ${MONGO_DB_NAME}
-    restart: always
-    ports:
-      - 2717:27017
+  mongo:
+    image: mongo:5.0.0
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
-    # volumes:
-    #   - mongodb:/data/db
+      - MONGO_URL=mongodb://mongo:27017/dev
     volumes:
       - ./data/mongo:/data/db:delegated
-    command: ['--auth']
-    healthcheck:
-      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
-      interval: 5s
-      timeout: 5s
-      retries: 3
-      start_period: 5s
-
-# volumes:
-#   mongodb:
-#     external: true
+    ports:
+      - 27017:27017

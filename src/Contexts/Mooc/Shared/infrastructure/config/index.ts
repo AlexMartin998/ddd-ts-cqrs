@@ -15,6 +15,7 @@ const moocConfig = convict({
 			format: String,
 			env: 'MONGO_URL',
 			default: 'mongodb://localhost:27017/mooc-backend-dev'
+			// default: 'mongodb://adrian:somePassword123@0.0.0.0:2717/'
 		}
 	}
 });
