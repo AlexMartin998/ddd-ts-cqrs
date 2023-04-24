@@ -12,7 +12,7 @@ export class Uuid extends ValueObject<string> {
 	}
 
 	static random(): Uuid {
-		return new Uuid(uuid() as string);
+		return new Uuid(uuid());
 	}
 
 	private ensureIsValidUuid(id: string): void {
