@@ -1,22 +1,45 @@
+# ####### MongoDB
+# services:
+#   # Este namespace NO es 1 Class, sino q vas a usar la Factoria, vas a usar esta Otra clase aparte q es 'MongoConfigFactory' y vas a llamar al method 'createConfig', q lo q te devuelva ese method va a ser la Instancia q el Contenedor del Inyector de Dependencias va a registrar y cada vez q se pida al Inyector de Dependencias con este NamesPace, tu me des esa instancia (resultado del method)
+#   Mooc.MongoConfig:
+#     factory:
+#       class: ../../../../../Contexts/Mooc/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+#       method: 'createConfig'
+
+# 	# Aqui el method  'createClient'  SI recibe Args, asi q se los pasamos. Igual es un Factory
+#     # Ags: contextName q en este caso es 'mooc', Config: del inyector de deps de arriba
+#   # Igual, va a tener en el contenedor del inyector lo q instancie el method en cuestion
+#   Mooc.ConnectionManager:
+#     factory:
+#       class: ../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory
+#       method: 'createClient'
+#     arguments: ['mooc', '@Mooc.MongoConfig']
+
+#   # Recibimos x args lo q devuleve el 'createClient', asi q vamos a tener directamente el Cliente de Mongo, NO vamos a porder jugar con las conexiones de otro BC, asi q NO nos podemos saltar las Restricciones q ya hemos definido
+#   Mooc.Courses.domain.CourseRepository:
+#     class: ../../../../../Contexts/Mooc/Courses/infrastructure/persistence/MongoCourseRepository
+#     arguments: ['@Mooc.ConnectionManager']
+
+#   Mooc.Courses.application.CourseCreator:
+#     class: ../../../../../Contexts/Mooc/Courses/application/CourseCreator
+#     arguments: ['@Mooc.Courses.domain.CourseRepository']
+
+
+
 services:
-  # Este namespace NO es 1 Class, sino q vas a usar la Factoria, vas a usar esta Otra clase aparte q es 'MongoConfigFactory' y vas a llamar al method 'createConfig', q lo q te devuelva ese method va a ser la Instancia q el Contenedor del Inyector de Dependencias va a registrar y cada vez q se pida al Inyector de Dependencias con este NamesPace, tu me des esa instancia (resultado del method)
-  Mooc.MongoConfig:
+  Mooc.TypeOrmConfig:
     factory:
-      class: ../../../../../Contexts/Mooc/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+      class: ../../../../../Contexts/Mooc/Shared/infrastructure/persistence/postgre/TypeOrmConfigFactory
       method: 'createConfig'
 
-	# Aqui el method  'createClient'  SI recibe Args, asi q se los pasamos. Igual es un Factory
-    # Ags: contextName q en este caso es 'mooc', Config: del inyector de deps de arriba
-  # Igual, va a tener en el contenedor del inyector lo q instancie el method en cuestion
   Mooc.ConnectionManager:
     factory:
-      class: ../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory
+      class: ../../../../../Contexts/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory
       method: 'createClient'
-    arguments: ['mooc', '@Mooc.MongoConfig']
+    arguments: ['mooc', '@Mooc.TypeOrmConfig']
 
-  # Recibimos x args lo q devuleve el 'createClient', asi q vamos a tener directamente el Cliente de Mongo, NO vamos a porder jugar con las conexiones de otro BC, asi q NO nos podemos saltar las Restricciones q ya hemos definido
   Mooc.Courses.domain.CourseRepository:
-    class: ../../../../../Contexts/Mooc/Courses/infrastructure/persistence/MongoCourseRepository
+    class: ../../../../../Contexts/Mooc/Courses/infrastructure/persistence/TypeOrmCourseRepository
     arguments: ['@Mooc.ConnectionManager']
 
   Mooc.Courses.application.CourseCreator:
