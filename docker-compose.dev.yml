@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   mongo:
-    image: mongo:5.0.0
+    image: mongo:6.0
     environment:
       - MONGO_URL=mongodb://mongo:27017/dev
     volumes:
-      - ./data/mongo:/data/db:delegated
+      - mongo_db_ddd:/data/db
+      # - ./data/mongo:/data/db:delegated
     ports:
       - 27017:27017
-
   postgres:
     image: postgres:14.6
     environment:
@@ -21,8 +21,8 @@ services:
     restart: always
     user: postgres
     volumes:
-      - postgres_db:/var/lib/postgresql/data
-
+      - postgres_db_ddd:/var/lib/postgresql/data
 
 volumes:
-  postgres_db:
+  postgres_db_ddd:
+  mongo_db_ddd:

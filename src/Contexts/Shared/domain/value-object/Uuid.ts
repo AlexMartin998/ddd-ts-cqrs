@@ -5,7 +5,7 @@ import { InvalidArgumentError } from './InvalidArgumentError';
 import { ValueObject } from './ValueObject';
 
 export class Uuid extends ValueObject<string> {
-	// el con lo hace instanciable, asi q cumple con NewableClass a pesar de 1 NO extiende de ella
+	// el con lo hace instanciable, asi q cumple con NewableClass a pesar de q NO extiende de ella
 	constructor(value: string) {
 		super(value);
 		this.ensureIsValidUuid(value);
